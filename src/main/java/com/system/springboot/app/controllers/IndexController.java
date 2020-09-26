@@ -1,6 +1,7 @@
 package com.system.springboot.app.controllers;
 
 import com.system.springboot.app.models.Usuario;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,17 @@ import java.util.List;
 @RequestMapping("/app")
 public class IndexController {
 
+    @Value("${texto.indexcontroller.index.titulo}")
+    private String textoIndex;
+    @Value("${texto.indexcontroller.perfil.titulo}")
+    private String textoPerfil;
+    @Value("${texto.indexcontroller.listar.titulo}")
+    private String textoListar;
+
     @GetMapping({"/index", "/", "", "/home"})
     //Usando Model
     public String Index(Model model) {
-        model.addAttribute("titulo", "hola Spring Framework!");
+        model.addAttribute("titulo", textoIndex);
         return "index";
     }
 
@@ -46,16 +54,16 @@ public class IndexController {
         Usuario usuario = new Usuario();
         usuario.setNombre("Gian");
         usuario.setApellido("Wong");
-        usuario.setEmail("giand@gmail.com");
+        //usuario.setEmail("giand@gmail.com");
         model.addAttribute("usuario", usuario);
-        model.addAttribute("titulo", "Perfil del usuario: ".concat(usuario.getNombre()));
+        model.addAttribute("titulo", textoPerfil.concat(usuario.getNombre()));
         return "perfil";
     }
 
     @GetMapping("/listar")
     //Cpm Arrays y ModelAttribute
     public String listar(Model model) {
-        model.addAttribute("titulo", "Listado de usuarios");
+        model.addAttribute("titulo", textoListar);
         return "listar";
     }
     @ModelAttribute("usuarios")

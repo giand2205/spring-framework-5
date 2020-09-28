@@ -1,0 +1,8 @@
+texto:
+  indexcontroller:
+    index:
+      titulo: ¡Hola Spring Framework con Modal!
+    perfil:
+      titulo: 'Perfil del usuario: '
+    listar:
+      titulo: Listado de usuarios
